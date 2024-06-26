@@ -35,12 +35,28 @@ body {
     background-color: #ffffff;
 }
 
+h2 {
+    padding-top: 1rem;
+}
+
 /* JS output container */
 ul {
-    padding-top: 1rem;
     list-style: none;
     font-weight: 700;
     font-size: 1.25rem;
+}
+
+#completed-list {
+    color: #888888;
+}
+
+.alert-message {
+    font-size: 1.25rem;
+    margin-top: 1rem;
+}
+
+.completed {
+    color: #888888;
 }
 
 /* JS output */
@@ -58,13 +74,32 @@ li span::before {
     font-size: 1.1rem;
 }
 
+ul.completed span {
+    text-decoration: line-through;
+}
+
+li div {
+    display: flex;
+    gap: .5rem;
+}
+
 li .list-option {
     appearance: none;
-    padding: .25rem .25rem;
+    width: 1.5rem;
+    height: 1.5rem;
     cursor: pointer;
     border: 1px solid #000000;
     background-color: #ffffff;
     border-radius: .25rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+ul.completed .list-option {
+    color: #888888;
+    border-color: #888888;
 }
 
 li .list-option:active {
@@ -72,14 +107,7 @@ li .list-option:active {
     color: #ffffff;
 }
 
-.completed-list {
-    color: #707070;
-}
-
-.completed-list .list-option {
-    border-color: #707070;
-}
-
-.completed-list {
-    background-color: #707070;
+ul.completed .list-option:active {
+    background-color: #888888;
+    color: #ffffff;
 }

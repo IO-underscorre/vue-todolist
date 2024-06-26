@@ -21,14 +21,48 @@
                     La tua lista delle cose da fare
                 </h1>
 
-                <!-- JS output containers -->
-                <ul id="completed-list">
-                    <!-- JS output -->
-                </ul>
+                <!-- To-do list -->
+                <div>
+                    <h2>
+                        Da fare
+                    </h2>
+                    
+                    <ul id="to-do-list" v-if="todoList.length">
+                        <li v-for="(item , index) in todoList">
+                            <span>{{ item }}</span>
+                            <div>
+                                <button class="list-option in-cart"><i class="fa-solid fa-check"></i></button>
+                                <button class="list-option delete"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="alert-message" v-else-if="completedList.length">
+                        Hai completato tutto quello che dovevi fare!
+                    </p>
+                    <p class="alert-message" v-else>
+                        Aggiungi qualcosa da fare per iniziare!
+                    </p>
+                </div>
 
-                <ul id="shopping-list">
-                    <!-- JS output -->
-                </ul>
+                <!-- Completed list -->
+                <div v-show="todoList.length || completedList.length">
+                    <h2>
+                        Completate
+                    </h2>
+
+                    <ul class="completed" v-if="completedList.length">
+                        <li v-for="(item , index) in completedList">
+                            <span>{{ item }}</span>
+                            <div>
+                                <button class="list-option in-cart"><i class="fa-solid fa-x"></i></button>
+                                <button class="list-option delete"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </li>
+                    </ul>
+                    <p class="alert-message completed" v-else>
+                        Non hai ancora completato alcuna cosa da fare!
+                    </p>
+                </div>
             </div>
         </div>
     </div>
