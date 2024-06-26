@@ -31,8 +31,8 @@
                         <li v-for="(item , index) in todoList">
                             <span>{{ item }}</span>
                             <div>
-                                <button class="list-option in-cart"><i class="fa-solid fa-check"></i></button>
-                                <button class="list-option delete"><i class="fa-solid fa-trash"></i></button>
+                                <button class="list-option in-cart" @click="completedList.unshift(todoList.splice(index , 1)[0])"><i class="fa-solid fa-check"></i></button>
+                                <button class="list-option delete" @click="todoList.splice(index , 1)"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </li>
                     </ul>
@@ -54,8 +54,8 @@
                         <li v-for="(item , index) in completedList">
                             <span>{{ item }}</span>
                             <div>
-                                <button class="list-option in-cart"><i class="fa-solid fa-x"></i></button>
-                                <button class="list-option delete"><i class="fa-solid fa-trash"></i></button>
+                                <button class="list-option in-cart" @click="todoList.unshift(completedList.splice(index , 1)[0])"><i class="fa-solid fa-x"></i></button>
+                                <button class="list-option delete" @click="completedList.splice(index , 1)"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </li>
                     </ul>
