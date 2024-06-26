@@ -26,17 +26,16 @@
                     <h2>
                         Da fare
                     </h2>
-                    
-                    <ul id="to-do-list" v-if="todoList.length">
-                        <li v-for="(item , index) in todoList">
-                            <span>{{ item }}</span>
+                    <ul id="to-do-list" v-if="getTodoList.length">
+                        <li v-for="item in getTodoList">
+                            <span>{{ item.task }}</span>
                             <div>
-                                <button class="list-option in-cart" @click="completedList.unshift(todoList.splice(index , 1)[0])"><i class="fa-solid fa-check"></i></button>
-                                <button class="list-option delete" @click="todoList.splice(index , 1)"><i class="fa-solid fa-trash"></i></button>
+                                <button class="list-option in-cart" @click="changeStatusOfTask(item)"><i class="fa-solid fa-check"></i></button>
+                                <button class="list-option delete" @click="deleteTask(item)"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </li>
                     </ul>
-                    <p class="alert-message" v-else-if="completedList.length">
+                    <p class="alert-message" v-else-if="getCompletedList.length">
                         Hai completato tutto quello che dovevi fare!
                     </p>
                     <p class="alert-message" v-else>
@@ -45,17 +44,16 @@
                 </div>
 
                 <!-- Completed list -->
-                <div v-show="todoList.length || completedList.length">
+                <div v-show="getTodoList.length || getCompletedList.length">
                     <h2>
                         Completate
                     </h2>
-
-                    <ul class="completed" v-if="completedList.length">
-                        <li v-for="(item , index) in completedList">
-                            <span>{{ item }}</span>
+                    <ul class="completed" v-if="getCompletedList.length">
+                        <li v-for="item in getCompletedList">
+                            <span>{{ item.task }}</span>
                             <div>
-                                <button class="list-option in-cart" @click="todoList.unshift(completedList.splice(index , 1)[0])"><i class="fa-solid fa-x"></i></button>
-                                <button class="list-option delete" @click="completedList.splice(index , 1)"><i class="fa-solid fa-trash"></i></button>
+                                <button class="list-option in-cart" @click="changeStatusOfTask(item , false)"><i class="fa-solid fa-x"></i></button>
+                                <button class="list-option delete" @click="deleteTask(item)"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </li>
                     </ul>
