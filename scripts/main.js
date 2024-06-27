@@ -4,6 +4,11 @@ createApp({
     data() {
         return {
             todoAndCompletedList: [],
+
+            taskInputed: '',
+
+            hasInputError: false,
+            inputIsFocused: false
         }
     },
 
@@ -14,6 +19,22 @@ createApp({
 
         deleteTask(taskToDelete) {
             this.todoAndCompletedList.splice(taskToDelete.indexOfTaskInOriginalArray , 1);
+        },
+
+        addNewTask() {
+            if(/[a-z]{3,}/i.test(this.taskInputed)) {
+                this.hasInputError = false;
+                const newTask = {
+                    text: this.taskInputed.replace(/\s+/g,' ').trim(),
+                    done: false
+                };
+                this.todoAndCompletedList.unshift(newTask);
+                this.taskInputed = '';
+                return true;
+            } else {
+                this.hasInputError = true;
+                return false;
+            }
         }
     },
 
@@ -42,6 +63,14 @@ createApp({
                 }
                 return newList;
             } , []);
+        },
+
+        placeholderAddTaskInput() {
+            if(!this.inputIsFocused) {
+                return !this.todoAndCompletedList.length ? 'Aggiungi un compito per iniziare!' : 'Aggiungi un altro compito...';
+            } else {
+                return '';
+            }
         }
     }
 }).mount('#app');

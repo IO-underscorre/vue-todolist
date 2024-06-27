@@ -26,21 +26,21 @@
                     <h2>
                         Da fare
                     </h2>
-                    <ul id="to-do-list" v-if="getTodoList.length">
+                    <ul id="to-do-list">
+                        <li class="add-to-list">
+                            <button class="option in-cart" @click="addNewTask()"><i class="fa-solid fa-plus"></i></button>
+                            <input type="text" :class="{ 'error' : hasInputError }" :placeholder="placeholderAddTaskInput" v-model="taskInputed" @focus="inputIsFocused = true" @blur="inputIsFocused = false" @keyup.enter="addNewTask()">
+                            <b class="error-message" v-show="hasInputError">Input non valido!</b>
+                        </li>
                         <li v-for="item in getTodoList">
-                            <span>{{ item.task }}</span>
-                            <div>
-                                <button class="list-option in-cart" @click="changeStatusOfTask(item)"><i class="fa-solid fa-check"></i></button>
-                                <button class="list-option delete" @click="deleteTask(item)"><i class="fa-solid fa-trash"></i></button>
+                            <span class="task-indicator"><i class="fa-regular fa-circle-right"></i></span>
+                            <span class="task-text">{{ item.task }}</span>
+                            <div class="options-container">
+                                <button class="option in-cart" @click="changeStatusOfTask(item)"><i class="fa-solid fa-check"></i></button>
+                                <button class="option delete" @click="deleteTask(item)"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </li>
                     </ul>
-                    <p class="alert-message" v-else-if="getCompletedList.length">
-                        Hai completato tutto quello che dovevi fare!
-                    </p>
-                    <p class="alert-message" v-else>
-                        Aggiungi qualcosa da fare per iniziare!
-                    </p>
                 </div>
 
                 <!-- Completed list -->
@@ -50,10 +50,11 @@
                     </h2>
                     <ul class="completed" v-if="getCompletedList.length">
                         <li v-for="item in getCompletedList">
-                            <span>{{ item.task }}</span>
-                            <div>
-                                <button class="list-option in-cart" @click="changeStatusOfTask(item , false)"><i class="fa-solid fa-x"></i></button>
-                                <button class="list-option delete" @click="deleteTask(item)"><i class="fa-solid fa-trash"></i></button>
+                            <span class="task-indicator"><i class="fa-regular fa-circle-right"></i></span>
+                            <span class="task-text">{{ item.task }}</span>
+                            <div class="options-container">
+                                <button class="option in-cart" @click="changeStatusOfTask(item , false)"><i class="fa-solid fa-x"></i></button>
+                                <button class="option delete" @click="deleteTask(item)"><i class="fa-solid fa-trash"></i></button>
                             </div>
                         </li>
                     </ul>
